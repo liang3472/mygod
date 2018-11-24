@@ -4,7 +4,7 @@ logs
 npm-debug.log*
 
 # config
-# config.conf
+config.conf
 
 # Dependency directories
 node_modules
