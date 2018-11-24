@@ -1,0 +1,17 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# config
+# config.conf
+
+# Dependency directories
+node_modules
+dist
+
+# Tool
+.idea
+.vscode
+
+.DS_Store

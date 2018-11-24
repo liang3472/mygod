@@ -1,0 +1,24 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:location
+# Required-Start:$remote_fs $syslog
+# Required-Stop:$remote_fs $syslog
+# Default-Start:2 3 4 5
+# Default-Stop:0 1 6
+# Short-Description: location
+# Description: This service is used to start my applaction
+### END INIT INFO
+
+case "$1" in
+    start):
+        echo "Starting location service"
+        su pi -c "cd /home/pi/mygod/server/drive/ && python2 getGPSInfoBySerial.py >> ../../logs/location.log"
+    ;;
+    stop):
+        echo "Stop location service"
+        echo "Usage: service location start|stop"
+        exit 1 ;;
+esac
+
+exit 0
