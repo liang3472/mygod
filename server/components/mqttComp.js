@@ -1,11 +1,15 @@
 const RandomString = require('randomstring');
 const Mqtt = require('mqtt');
 // 指令
-const CMD_TAKE_PIC = "CMD_TAKE_PIC";
-const CMD_REBOOT = "CMD_REBOOT";
-const CMD_GET_TEMP = "CMD_GET_TEMP";
-const CMD_GET_LOCATION = "CMD_GET_LOCATION";
-const CMD_HORN = "CMD_HORN";
+const CMD_TAKE_PIC = 'CMD_TAKE_PIC';
+const CMD_REBOOT = 'CMD_REBOOT';
+const CMD_GET_TEMP = 'CMD_GET_TEMP';
+const CMD_GET_LOCATION = 'CMD_GET_LOCATION';
+const CMD_HORN = 'CMD_HORN';
+const CMD_FORWARD = 'CMD_FORWARD';
+const CMD_BACK = 'CMD_BACK';
+const CMD_LEFT = 'CMD_LEFT';
+const CMD_RIGHT = 'CMD_RIGHT';
 
 let config;
 const MqttComp = {
@@ -69,6 +73,18 @@ const MqttComp = {
                     setTimeout(() => {
                         manager.cmdComp.exec('sudo reboot')
                     }, 1000);
+                    break;
+                case CMD_FORWARD:
+                    manager.controlComp.move(manager.controlComp.FORWARD);
+                    break;
+                case CMD_BACK:
+                    manager.controlComp.move(manager.controlComp.BACK);
+                    break;
+                case CMD_LEFT:
+                    manager.controlComp.move(manager.controlComp.LEFT);
+                    break;
+                case CMD_RIGHT:
+                    manager.controlComp.move(manager.controlComp.RIGHT);
                     break;
                 default:
                     console.log('unknow commend');

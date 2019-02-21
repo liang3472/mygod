@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const ini = require('ini');
-const MqttComp = require('./components/mqttComp');
+// const MqttComp = require('./components/mqttComp');
+const MqttComp = require('./components/mqttLocalComp');
 const CameraComp = require('./components/cameraComp');
 const CmdComp = require('./components/cmdComp');
 const FileUploadComp = require('./components/fileUploadComp');
@@ -10,6 +11,7 @@ const LocationComp = require('./components/locationComp');
 const HornComp = require('./components/hornComp');
 const LedComp = require('./components/ledComp');
 const DbComp = require('./components/dbComp');
+const ControlComp = require('./components/controlComp');
 
 const configPath = '../config.conf';
 const LOOP_TAKE_PIC = 60 * 1000;
@@ -24,7 +26,8 @@ const manager = {
     locationComp: LocationComp,
     hornComp: HornComp,
     ledComp: LedComp,
-    dbComp: DbComp
+    dbComp: DbComp,
+    controlComp: ControlComp
 }
 
 console.log('检测配置文件');
@@ -38,6 +41,7 @@ fs.exists(configPath, exists => {
         TemperatureComp.init(manager);
         LocationComp.init(config.Location, manager);
         DbComp.init(config.Tsdb);
+        ControlComp.init(manager);
     } else {
         console.log('缺少配置文件');
     }
